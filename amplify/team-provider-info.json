@@ -10,6 +10,11 @@
       "StackName": "amplify-amplifyreactnativetu-staging-181850",
       "StackId": "arn:aws:cloudformation:us-east-2:222039689937:stack/amplify-amplifyreactnativetu-staging-181850/e76aef40-85e6-11ec-b4eb-0a0e8915b84e",
       "AmplifyAppId": "dersrfebshwbp"
+    },
+    "categories": {
+      "auth": {
+        "amplifyreactnativetu56931aa4": {}
+      }
     }
   }
 }

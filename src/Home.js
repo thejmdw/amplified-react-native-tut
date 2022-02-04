@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { FlatList, Modal, Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
+import { ActivityIndicator, FlatList, Modal, Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
 import { DataStore } from 'aws-amplify'
 import { Todo } from './models'
 
@@ -60,13 +60,15 @@ const AddTodoModal = ({ modalVisible, setModalVisible }) => {
 const TodoList = () => {
     
     const [todos, setTodos] = useState([]);
-  
+    const [isLoading, setIsLoading] = useState(true)
+    
     useEffect(() => {
 
         //query the initial todolist and subscribe to data updates
         const subscription = DataStore.observeQuery(Todo).subscribe((snapshot) => {
           //isSynced can be used to show a loading spinner when the list is being loaded. 
           const { items, isSynced } = snapshot;
+          setIsLoading(!isSynced)
           setTodos(items);
         });
     
@@ -96,7 +98,7 @@ const TodoList = () => {
     }
   
     const renderItem = ({ item }) => (
-      <Pressable
+      isLoading ? <ActivityIndicator /> : <Pressable
         onLongPress={() => {
           deleteTodo(item);
         }}
