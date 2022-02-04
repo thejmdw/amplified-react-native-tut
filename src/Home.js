@@ -2,10 +2,20 @@ import React, { useState, useEffect } from 'react'
 import { ActivityIndicator, FlatList, Modal, Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
 import { DataStore } from 'aws-amplify'
 import { Todo } from './models'
+import { Auth } from 'aws-amplify';
+
+async function signOut() {
+    try {
+        await Auth.signOut();
+    } catch (error) {
+        console.log('error signing out: ', error);
+    }
+}
 
 const Header = () => (
     <View style={styles.headerContainer}>
         <Text style={styles.headerTitle}>My Todo List</Text>
+        <Pressable onPress={signOut}><Text>Sign Out</Text></Pressable>
     </View>
 )
 
